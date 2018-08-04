@@ -4,6 +4,7 @@ package com.anwesh.uiprojects.messageboxdownwardview
  * Created by anweshmishra on 05/08/18.
  */
 
+import android.app.Activity
 import android.graphics.*
 import android.view.View
 import android.view.MotionEvent
@@ -193,6 +194,15 @@ class MessageBoxDownwardView(ctx : Context) : View(ctx) {
             lmbd.startUpdating {
                 animator.start()
             }
+        }
+    }
+
+    companion object {
+
+        fun create(activity : Activity) : MessageBoxDownwardView {
+            val view : MessageBoxDownwardView = MessageBoxDownwardView(activity)
+            activity.setContentView(view)
+            return view
         }
     }
 }
