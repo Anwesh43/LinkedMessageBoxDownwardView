@@ -32,9 +32,9 @@ fun Canvas.drawMBDNode(i : Int, scale : Float, paint : Paint) {
     paint.color = Color.BLACK
     paint.strokeWidth = Math.min(w, h) / 60
     paint.strokeCap = Paint.Cap.ROUND
-    val lineSize : Float = size/3 * sc1
+    val lineSize : Float = size/3 * (1 - sc1)
     for (i in 0..2) {
-        drawLine(-lineSize, 0f, lineSize, (i - 1) * size/3, paint)
+        drawLine(-lineSize, (i - 1) * size/3, lineSize, (i - 1) * size/3, paint)
     }
     restore()
 }
@@ -61,7 +61,7 @@ class MessageBoxDownwardView(ctx : Context) : View(ctx) {
     data class State(var scale : Float = 0f, var prevScale : Float = 0f, var dir : Float = 0f) {
 
         fun update(cb : (Float) -> Unit) {
-            scale += 0.1f * dir
+            scale += 0.05f * dir
             if (Math.abs(scale - prevScale) > 1) {
                 scale = prevScale + dir
                 dir = 0f
@@ -97,7 +97,7 @@ class MessageBoxDownwardView(ctx : Context) : View(ctx) {
             if (animated) {
                 cb()
                 try {
-                    Thread.sleep(50)
+                    Thread.sleep(30)
                     view.invalidate()
                 } catch(ex : Exception) {
 
