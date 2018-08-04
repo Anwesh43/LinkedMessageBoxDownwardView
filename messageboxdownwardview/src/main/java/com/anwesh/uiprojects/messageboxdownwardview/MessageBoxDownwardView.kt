@@ -169,4 +169,28 @@ class MessageBoxDownwardView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : MessageBoxDownwardView) {
+
+        private val animator : Animator = Animator(view)
+
+        private val lmbd : LinkedMBD = LinkedMBD(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(Color.parseColor("#212121"))
+            lmbd.draw(canvas, paint)
+            animator.animate {
+                lmbd.update {i, scl ->
+                    animator.stop()
+                }
+            }
+
+        }
+
+        fun handleTap() {
+            lmbd.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
