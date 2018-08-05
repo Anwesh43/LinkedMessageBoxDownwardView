@@ -23,7 +23,7 @@ fun Canvas.drawMBDNode(i : Int, scale : Float, paint : Paint) {
     val sc2 : Float = Math.min(0.5f, Math.max(0f, scale - 0.5f)) * 2
     save()
     translate(w/2, hGap * i + hGap/2 + hGap * sc2)
-    drawRoundRect(RectF(-size/2, -size/2, size/2, size/2), size/5, size/5, paint)
+    drawRoundRect(RectF(-size, -size/2, size, size/2), size/5, size/5, paint)
     val path : Path = Path()
     path.moveTo(-tSize/2, size/2)
     path.lineTo(0f, size/2 + tSize)
@@ -32,7 +32,7 @@ fun Canvas.drawMBDNode(i : Int, scale : Float, paint : Paint) {
     paint.color = Color.BLACK
     paint.strokeWidth = Math.min(w, h) / 60
     paint.strokeCap = Paint.Cap.ROUND
-    val lineSize : Float = size/3 * (1 - sc1)
+    val lineSize : Float = 2 * size / 3 * (1 - sc1)
     for (i in 0..2) {
         drawLine(-lineSize, (i - 1) * size/3, lineSize, (i - 1) * size/3, paint)
     }
