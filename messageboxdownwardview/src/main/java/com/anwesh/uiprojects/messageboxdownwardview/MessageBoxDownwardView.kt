@@ -134,8 +134,8 @@ class MessageBoxDownwardView(ctx : Context) : View(ctx) {
             addNeighbor()
         }
 
-        fun update(cb : (Float) -> Unit) {
-            state.update(cb)
+        fun update(cb : (Int, Float) -> Unit) {
+            state.update({cb(i, it)})
         }
 
         fun startUpdating(cb : () -> Unit) {
@@ -166,11 +166,11 @@ class MessageBoxDownwardView(ctx : Context) : View(ctx) {
         }
 
         fun update(cb : (Int, Float) -> Unit) {
-            curr.update {
+            curr.update {i, scale ->
                 curr = curr.getNext(dir) {
                     dir *= -1
                 }
-                cb(i, it)
+                cb(i, scale)
             }
         }
 
